@@ -1,0 +1,29 @@
+Feature: Login functionality
+
+  @smoke
+  Scenario Outline: Login with different users
+
+    Given user is on the login page
+    When user enters username "<username>"
+    And user enters password "<password>"
+    And user clicks login
+    Then user should see the home page
+
+    Examples:
+      | username | password |
+      | Saro     | 1234     |
+      | Rahul    | 5678     |
+      | Arun     | 9999     |
+
+
+  Scenario: Enter login details using DataTable
+
+    Given user is on the login page
+
+    When user enters the following login details
+      | username | password |
+      | Saro     | 1234     |
+
+    And user clicks login
+
+    Then user should see the home page

@@ -1,0 +1,57 @@
+pipeline {
+
+    agent any
+
+    parameters {
+
+        choice(
+            name: 'ENV',
+            choices: ['qa', 'uat'],
+            description: 'Environment'
+        )
+
+        choice(
+            name: 'BROWSER',
+            choices: ['chrome', 'firefox', 'edge'],
+            description: 'Browser'
+        )
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Execute Tests') {
+            steps {
+                sh """
+                    mvn clean test \
+                    -Denv=${ENV} \
+                    -Dbrowser=${BROWSER}
+                """
+            }
+        }
+    }
+
+    post {
+
+        always {
+
+            archiveArtifacts(
+                artifacts: 'reports/**/*',
+                allowEmptyArchive: true
+            )
+        }
+
+        success {
+            echo 'Automation execution passed.'
+        }
+
+        failure {
+            echo 'Automation execution failed.'
+        }
+    }
+}

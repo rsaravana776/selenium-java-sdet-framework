@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+         http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ===================================================== -->
+    <!-- PROJECT INFORMATION                                   -->
+    <!-- ===================================================== -->
+
+    <groupId>com.saro</groupId>
+    <artifactId>sdet-automation-framework</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>SDET Automation Framework</name>
+    <description>
+        Selenium UI + REST Assured API + Cucumber BDD + TestNG Automation Framework
+    </description>
+
+
+    <!-- ===================================================== -->
+    <!-- PROPERTIES                                            -->
+    <!-- ===================================================== -->
+
+    <properties>
+
+        <!-- Java -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Selenium -->
+        <selenium.version>4.49.0</selenium.version>
+
+        <!-- TestNG -->
+        <testng.version>7.9.0</testng.version>
+
+        <!-- Cucumber -->
+        <cucumber.version>7.34.8</cucumber.version>
+
+        <!-- REST Assured -->
+        <rest.assured.version>6.0.1</rest.assured.version>
+
+        <!-- Apache POI -->
+        <poi.version>5.5.1</poi.version>
+
+        <!-- Log4j -->
+        <log4j.version>2.26.1</log4j.version>
+
+        <!-- Extent Reports -->
+        <extentreports.version>5.1.1</extentreports.version>
+
+        <!-- Jackson -->
+        <jackson.version>2.18.3</jackson.version>
+
+    </properties>
+
+
+    <!-- ===================================================== -->
+    <!-- DEPENDENCIES                                          -->
+    <!-- ===================================================== -->
+
+    <dependencies>
+
+        <!-- ================================================= -->
+        <!-- SELENIUM                                           -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- TESTNG                                              -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- CUCUMBER                                            -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- REST ASSURED                                       -->
+        <!-- ================================================= -->
+
+        <!-- No test scope because API service classes are
+             located under src/main/java -->
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- APACHE POI                                         -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- LOG4J2                                              -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- EXTENT REPORTS                                     -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>1.14.0</version>
+        </dependency>
+
+
+        <!-- ================================================= -->
+        <!-- JACKSON                                            -->
+        <!-- ================================================= -->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <!-- ===================================================== -->
+    <!-- BUILD                                                  -->
+    <!-- ===================================================== -->
+
+    <build>
+
+        <plugins>
+
+            <!-- ================================================= -->
+            <!-- MAVEN COMPILER                                    -->
+            <!-- ================================================= -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+
+
+            <!-- ================================================= -->
+            <!-- MAVEN SUREFIRE                                    -->
+            <!-- ================================================= -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.5</version>
+
+                <configuration>
+
+                    <!-- Run the Cucumber TestNG runner directly.
+                         Do NOT use testng.xml here. -->
+
+                    <includes>
+                        <include>**/TestRunner.java</include>
+                    </includes>
+
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>
